@@ -6,13 +6,15 @@
 // drop      : Enter
 
 class Block {
-    constructor(x, y){
+    constructor(x, y, c='#CFD8DC'){
         this.x = x;
         this.y = y;
+        this.c = c;
     }
     draw() {
         push();
-        let s = 25;
+        let s = 40;  
+        fill(this.c); 
         rect(s*this.x, s*this.y, s, s);
         pop();
     }   
@@ -27,6 +29,16 @@ class Mino {
     }
     calcBlocks() {
         let blocks = [];
+        const colors = {
+            0:'#BA68C8', 
+            1:'#EF5350',
+            2:'#4CAF50',
+            3:'#F57C00',
+            4:'#F57C00',
+            5:'#FFCA28',
+            6:'#00B0FF',
+            10:'#FAFAFA'
+        };
         // switch
         switch(this.shape) {
             case 0: blocks = [
@@ -65,12 +77,13 @@ class Mino {
                 new Block(0, 0),
                 new Block(1, 0)];break; // I
         }
+        blocks = blocks.map(b => new Block(b.x, b.y, colors[this.shape]))
         let rot = (40000000 + this.rot) % 4;
         for(let r=0; r<rot; r++) {
             // rotate 90
-            blocks = blocks.map(b => new Block(-b.y, b.x));
+            blocks = blocks.map(b => new Block(-b.y, b.x, colors[this.shape]));
         }
-        blocks.forEach(b => (b.x+=this.x, b.y+=this.y));
+        blocks.forEach(b => (b.x+=this.x, b.y+=this.y, colors[this.shape]));
         return blocks;
     }
     draw() {
@@ -109,6 +122,7 @@ class Field {
             [1,0,0,0,0,0,0,0,0,0,0,1],
             [1,1,1,1,1,1,1,1,1,1,1,1]
         ];
+        this.color = '#FAFAFA'
     }
     tileAt(x, y) {
         if (x<0 || x >= 12 || y<0 || y>=21) return 1;
@@ -217,7 +231,7 @@ function keyPressed() {
 }
 
 function setup() {
-    createCanvas(300, 525);
+    createCanvas(480, 840   );
     background(64);
     game = new Game();
 }
