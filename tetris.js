@@ -1,6 +1,6 @@
 // Tetris
 // move left : A
-// move right: D
+// move right: D#ffd014
 // turn left : O
 // turn right: P
 // drop      : Enter
@@ -231,7 +231,7 @@ function keyPressed() {
 }
 
 function setup() {
-    createCanvas(480, 840   );
+    createCanvas(480, 840);
     background(64);
     game = new Game();
 }
