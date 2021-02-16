@@ -2,7 +2,7 @@
 
 This javascript application has been developped for my personal introduction to js programming.
 
-The base program is borrowed from [here](https://editor.p5js.org/AosagiHeron/sketches/whiCbrWPJ).
+Play : https://editor.p5js.org/moxak/full/JS1xZdzjF
 
 ## Tasks
 
